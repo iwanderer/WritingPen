@@ -10,6 +10,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.util.Log;
 
 import com.shiming.pen.R;
 import com.shiming.pen.old_code.ControllerPoint;
@@ -21,7 +22,7 @@ import com.shiming.pen.old_code.ControllerPoint;
  * @des 水彩笔
  */
 public class BrushPen extends BasePenExtend {
-
+    private final static String TAG = "BrushPen";
     private Bitmap mBitmap;
     //第一个Rect 代表要绘制的bitmap 区域，
     protected Rect mOldRect = new Rect();
@@ -33,8 +34,10 @@ public class BrushPen extends BasePenExtend {
         super(context);
         initTexture();
     }
+
     /**
      * 由于需要画笔piant中的一些信息，就不能让paint为null，所以setBitmap需要有paint的时候设置
+     *
      * @param paint
      */
     @Override
@@ -58,6 +61,7 @@ public class BrushPen extends BasePenExtend {
 
     /**
      * 主要是得到需要绘制的rect的区域
+     *
      * @param bitmap
      */
     private void setBitmap(Bitmap bitmap) {
@@ -77,13 +81,13 @@ public class BrushPen extends BasePenExtend {
         canvas.drawBitmap(bitmap, 0, 0, paint);
 
         //src 代表需要绘制的区域
-        mOldRect.set(0, 0, mBitmap.getWidth()/4, mBitmap.getHeight()/4);
+        mOldRect.set(0, 0, mBitmap.getWidth() / 4, mBitmap.getHeight() / 4);
     }
-
 
 
     /**
      * 更具笔的宽度的变化，笔的透明度要和发生变化
+     *
      * @param point
      * @return
      */
@@ -112,6 +116,7 @@ public class BrushPen extends BasePenExtend {
 
     /**
      * 感谢作者，请教下怎么实时获取笔锋的宽度？
+     *
      * @param canvas
      * @param x0
      * @param y0
@@ -125,6 +130,7 @@ public class BrushPen extends BasePenExtend {
      */
     protected void drawLine(Canvas canvas, double x0, double y0, double w0,
                             int a0, double x1, double y1, double w1, int a1, Paint paint) {
+        Log.d(TAG, "drawLine");
         double curDis = Math.hypot(x0 - x1, y0 - y1);
         int factor = 2;
         if (paint.getStrokeWidth() < 6) {
@@ -185,6 +191,7 @@ public class BrushPen extends BasePenExtend {
         }
 
     }
+
     //对每个笔设置了透明度 如果这里不设置一个新的笔的话，每次down事件发生了，就会把一起的绘制完成的东西，透明度也发生改变，
     //这里还有想到更好的方法，
     // TODO: 2017/10/18

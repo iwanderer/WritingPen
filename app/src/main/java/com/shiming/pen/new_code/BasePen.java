@@ -16,7 +16,7 @@ public abstract class BasePen {
      *
      * @param canvas
      */
-    public abstract  void draw(Canvas canvas);
+    public abstract void draw(Canvas canvas);
 
     /**
      * 接受并处理onTouchEvent
@@ -24,9 +24,9 @@ public abstract class BasePen {
      * @param event
      * @return
      */
-    public  boolean onTouchEvent(MotionEvent event,Canvas canvas){
-         return false;
-     }
+    public boolean onTouchEvent(MotionEvent event, Canvas canvas) {
+        return false;
+    }
 
 
 }

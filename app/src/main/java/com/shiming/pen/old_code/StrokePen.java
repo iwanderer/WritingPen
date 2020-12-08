@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import com.shiming.pen.Bezier;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
  * @des  画笔的类（）
  */
 public class StrokePen {
+    private final static String TAG = "StrokePen";
     //这个控制笔锋的控制值
     protected float DIS_VEL_CAL_FACTOR = 0.02f;
 //    protected float DIS_VEL_CAL_FACTOR =2000f;
@@ -46,6 +48,7 @@ public class StrokePen {
     }
 
     public StrokePen(Context context) {
+        Log.d(TAG, "Stroke constructor");
         mPointList = new ArrayList<ControllerPoint>();
         mHWPointList = new ArrayList<ControllerPoint>();
         mBezier = new Bezier();
@@ -57,6 +60,7 @@ public class StrokePen {
      * @param canvas 画布
      */
     public void draw(Canvas canvas) {
+        Log.d(TAG, "draw");
         mPaint.setStyle(Paint.Style.FILL);
         //点的集合少 不去绘制
         if (mHWPointList == null || mHWPointList.size() < 1)

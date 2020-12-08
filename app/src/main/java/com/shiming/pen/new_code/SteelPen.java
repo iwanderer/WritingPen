@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.util.Log;
 
 import com.shiming.pen.old_code.ControllerPoint;
 
@@ -15,6 +16,7 @@ import static com.shiming.pen.new_code.IPenConfig.STEPFACTOR;
  * @des 钢笔
  */
 public class SteelPen extends BasePenExtend {
+    private final static String TAG = "SteelPen";
 
     public SteelPen(Context context) {
         super(context);
@@ -22,6 +24,7 @@ public class SteelPen extends BasePenExtend {
 
     @Override
     protected void drawNeetToDo(Canvas canvas) {
+        Log.d(TAG, "drawNeetToDo");
         for (int i = 1; i < mHWPointList.size(); i++) {
             ControllerPoint point = mHWPointList.get(i);
             drawToPoint(canvas, point, mPaint);
@@ -31,6 +34,7 @@ public class SteelPen extends BasePenExtend {
 
     @Override
     protected void moveNeetToDo(double curDis) {
+        Log.d(TAG, "moveNeetToDo");
         int steps = 1 + (int) curDis / STEPFACTOR;
         double step = 1.0 / steps;
         for (double t = 0; t < 1.0; t += step) {
@@ -41,6 +45,7 @@ public class SteelPen extends BasePenExtend {
 
     @Override
     protected void doNeetToDo(Canvas canvas, ControllerPoint point, Paint paint) {
+        Log.d(TAG, "doNeetToDo");
         drawLine(canvas, mCurPoint.x, mCurPoint.y, mCurPoint.width, point.x,
                 point.y, point.width, paint);
     }
@@ -60,6 +65,7 @@ public class SteelPen extends BasePenExtend {
      * @param paint
      */
     private void drawLine(Canvas canvas, double x0, double y0, double w0, double x1, double y1, double w1, Paint paint) {
+        Log.d(TAG, "drawLine");
         //求两个数字的平方根 x的平方+y的平方在开方记得X的平方+y的平方=1，这就是一个园
         double curDis = Math.hypot(x0 - x1, y0 - y1);
         int steps = 1;
